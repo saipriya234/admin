@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   TextField,
   Button,
@@ -9,8 +9,8 @@ import {
   IconButton,
   Checkbox,
   FormControlLabel,
-} from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 interface FormData {
   firstName: string;
@@ -34,12 +34,12 @@ interface FormErrors {
 
 const SiteAdminAddForm: React.FC = () => {
   const [formData, setFormData] = React.useState<FormData>({
-    firstName: '',
-    middleName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    firstName: "",
+    middleName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
     option1: false,
     option2: false,
   });
@@ -60,11 +60,11 @@ const SiteAdminAddForm: React.FC = () => {
     const { name, value, type, checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
     setFormErrors({
       ...formErrors,
-      [name]: value.trim() === '' && name !== 'middleName',
+      [name]: value.trim() === "" && name !== "middleName",
     });
   };
 
@@ -72,11 +72,11 @@ const SiteAdminAddForm: React.FC = () => {
     setFormErrors((prevErrors) => ({
       ...prevErrors,
       [name]:
-        (typeof formData[name] === 'string'
+        (typeof formData[name] === "string"
           ? (formData[name] as string).trim()
-          : '') === ''
+          : "") === ""
           ? `${name} is required`
-          : '',
+          : "",
     }));
   };
 
@@ -92,12 +92,12 @@ const SiteAdminAddForm: React.FC = () => {
     e.preventDefault();
 
     const newFormErrors: FormErrors = {
-      firstName: formData.firstName.trim() === '',
-      lastName: formData.lastName.trim() === '',
-      email: formData.email.trim() === '',
-      password: formData.password.trim() === '',
+      firstName: formData.firstName.trim() === "",
+      lastName: formData.lastName.trim() === "",
+      email: formData.email.trim() === "",
+      password: formData.password.trim() === "",
       confirmPassword:
-        formData.confirmPassword.trim() === '' ||
+        formData.confirmPassword.trim() === "" ||
         formData.confirmPassword !== formData.password,
     };
 
@@ -106,13 +106,13 @@ const SiteAdminAddForm: React.FC = () => {
     const isFormComplete =
       Object.values(newFormErrors).every((error) => !error) &&
       Object.values(formData).every(
-        (value) => typeof value === 'string' && value.trim() !== ''
+        (value) => typeof value === "string" && value.trim() !== "",
       );
 
     if (isFormComplete) {
-      console.log('Form submitted:', formData);
+      console.log("Form submitted:", formData);
     } else {
-      console.log('Form has errors. Please correct them.');
+      console.log("Form has errors. Please correct them.");
     }
   };
 
@@ -120,20 +120,20 @@ const SiteAdminAddForm: React.FC = () => {
     <Container component="main" maxWidth="md">
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
         }}
       >
         <div
           style={{
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-            width: '100%',
-            padding: '20px',
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            width: "100%",
+            padding: "20px",
           }}
         >
-          <Typography component="h1" variant="h5" sx={{color:'black'}}>
+          <Typography component="h1" variant="h5" sx={{ color: "black" }}>
             Add Site Admin 1
           </Typography>
           <form onSubmit={handleSubmit}>
@@ -148,11 +148,9 @@ const SiteAdminAddForm: React.FC = () => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  onBlur={() => handleBlur('firstName')}
+                  onBlur={() => handleBlur("firstName")}
                   error={formErrors.firstName}
-                  helperText={
-                    formErrors.firstName && 'First Name is required'
-                  }
+                  helperText={formErrors.firstName && "First Name is required"}
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -177,11 +175,9 @@ const SiteAdminAddForm: React.FC = () => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleInputChange}
-                  onBlur={() => handleBlur('lastName')}
+                  onBlur={() => handleBlur("lastName")}
                   error={formErrors.lastName}
-                  helperText={
-                    formErrors.lastName && 'Last Name is required'
-                  }
+                  helperText={formErrors.lastName && "Last Name is required"}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -194,13 +190,14 @@ const SiteAdminAddForm: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  onBlur={() => handleBlur('email')}
+                  onBlur={() => handleBlur("email")}
                   error={formErrors.email}
-                  helperText={formErrors.email && 'Email is required'}
+                  helperText={formErrors.email && "Email is required"}
                 />
               </Grid>
               <Grid item xs={6}>
-                <FormControlLabel sx={{color:'black'}}
+                <FormControlLabel
+                  sx={{ color: "black" }}
                   control={
                     <Checkbox
                       name="option1"
@@ -214,18 +211,16 @@ const SiteAdminAddForm: React.FC = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   label="Password"
-                  type={passwordVisibility ? 'text' : 'password'}
+                  type={passwordVisibility ? "text" : "password"}
                   fullWidth
                   margin="normal"
                   variant="outlined"
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  onBlur={() => handleBlur('password')}
+                  onBlur={() => handleBlur("password")}
                   error={formErrors.password}
-                  helperText={
-                    formErrors.password && 'Password is required'
-                  }
+                  helperText={formErrors.password && "Password is required"}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -247,20 +242,18 @@ const SiteAdminAddForm: React.FC = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   label="Confirm Password"
-                  type={
-                    confirmPasswordVisibility ? 'text' : 'password'
-                  }
+                  type={confirmPasswordVisibility ? "text" : "password"}
                   fullWidth
                   margin="normal"
                   variant="outlined"
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
-                  onBlur={() => handleBlur('confirmPassword')}
+                  onBlur={() => handleBlur("confirmPassword")}
                   error={formErrors.confirmPassword}
                   helperText={
                     formErrors.confirmPassword &&
-                    'Passwords do not match or are empty'
+                    "Passwords do not match or are empty"
                   }
                   InputProps={{
                     endAdornment: (
@@ -281,13 +274,14 @@ const SiteAdminAddForm: React.FC = () => {
                 />
               </Grid>
               <Grid item xs={6}>
-                <FormControlLabel sx={{color:'black'}}
+                <FormControlLabel
+                  sx={{ color: "black" }}
                   control={
                     <Checkbox
                       name="option2"
                       checked={formData.option2}
                       onChange={handleInputChange}
-                    /> 
+                    />
                   }
                   label="Is Instructor"
                 />
@@ -298,14 +292,12 @@ const SiteAdminAddForm: React.FC = () => {
                   variant="contained"
                   color="primary"
                   size="large"
-                  disabled={
-                    Object.entries(formData).some(
-                      ([key, value]) =>
-                        typeof value === 'string' &&
-                        value.trim() === '' &&
-                        key !== 'middleName'
-                    )
-                  }
+                  disabled={Object.entries(formData).some(
+                    ([key, value]) =>
+                      typeof value === "string" &&
+                      value.trim() === "" &&
+                      key !== "middleName",
+                  )}
                 >
                   Submit
                 </Button>

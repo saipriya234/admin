@@ -1,82 +1,92 @@
-import  { ChangeEvent, useState } from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Autocomplete from '@mui/material/Autocomplete';
-import Checkbox from '@mui/material/Checkbox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { ChangeEvent, useState } from "react";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Autocomplete from "@mui/material/Autocomplete";
+import Checkbox from "@mui/material/Checkbox";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const dropdownOptions = [
-  { title: 'Option 1' },
-  { title: 'Option 2' },
-  { title: 'Option 3' },
+  { title: "Option 1" },
+  { title: "Option 2" },
+  { title: "Option 3" },
 ];
 
 export default function DeaprtmentAddForm() {
   const [formData, setFormData] = useState({
-    departmentName: '',
-    location: '',
+    departmentName: "",
+    location: "",
     departmentAdmin: [],
     sites: [],
   });
 
   const [validationErrors, setValidationErrors] = useState({
-    departmentName: '',
-    location: '',
-    departmentAdmin: '',
-    sites: '',
+    departmentName: "",
+    location: "",
+    departmentAdmin: "",
+    sites: "",
   });
 
-  const isSubmitDisabled = Object.values(validationErrors).some((error) => error !== '') || Object.values(formData).some((value) => !value);
+  const isSubmitDisabled =
+    Object.values(validationErrors).some((error) => error !== "") ||
+    Object.values(formData).some((value) => !value);
 
-  const handleInputChange = (fieldName: string) => (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setFormData({
-      ...formData,
-      [fieldName]: value,
-    });
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: value.trim() ? '' : `${fieldName} is required.`,
-    }));
-  };
+  const handleInputChange =
+    (fieldName: string) => (event: ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setFormData({
+        ...formData,
+        [fieldName]: value,
+      });
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        [fieldName]: value.trim() ? "" : `${fieldName} is required.`,
+      }));
+    };
 
-  const handleAutocompleteChange = (fieldName: string) => (_: any, value: any) => {
-    setFormData({
-      ...formData,
-      [fieldName]: value,
-    });
-    setValidationErrors((prevErrors) => ({
-      ...prevErrors,
-      [fieldName]: value.length > 0 ? '' : `${fieldName} is required.`,
-    }));
-  };
+  const handleAutocompleteChange =
+    (fieldName: string) => (_: any, value: any) => {
+      setFormData({
+        ...formData,
+        [fieldName]: value,
+      });
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        [fieldName]: value.length > 0 ? "" : `${fieldName} is required.`,
+      }));
+    };
 
   const handleSubmit = () => {
     setValidationErrors({
-      departmentName: !formData.departmentName ? 'Please enter Department Name.' : '',
-      location: !formData.location ? 'Please enter Location.' : '',
-      departmentAdmin: formData.departmentAdmin.length === 0 ? 'Please select at least one Department Admin.' : '',
-      sites: formData.sites.length === 0 ? 'Please select at least one Site.' : '',
+      departmentName: !formData.departmentName
+        ? "Please enter Department Name."
+        : "",
+      location: !formData.location ? "Please enter Location." : "",
+      departmentAdmin:
+        formData.departmentAdmin.length === 0
+          ? "Please select at least one Department Admin."
+          : "",
+      sites:
+        formData.sites.length === 0 ? "Please select at least one Site." : "",
     });
 
     if (!isSubmitDisabled) {
-      console.log('Form submitted:', formData);
+      console.log("Form submitted:", formData);
     }
   };
   return (
     <Box
       component="form"
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        '& .MuiTextField-root': { m: 1, width: '100%' },
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        "& .MuiTextField-root": { m: 1, width: "100%" },
       }}
       noValidate
       autoComplete="off"
@@ -89,7 +99,7 @@ export default function DeaprtmentAddForm() {
             size="small"
             placeholder="Department Name"
             value={formData.departmentName}
-            onChange={handleInputChange('departmentName')}
+            onChange={handleInputChange("departmentName")}
             helperText={validationErrors.departmentName}
             error={!!validationErrors.departmentName}
           />
@@ -100,14 +110,14 @@ export default function DeaprtmentAddForm() {
             size="small"
             placeholder="Location"
             value={formData.location}
-            onChange={handleInputChange('location')}
+            onChange={handleInputChange("location")}
             helperText={validationErrors.location}
             error={!!validationErrors.location}
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <Autocomplete
-          size="small"
+            size="small"
             multiple
             options={dropdownOptions}
             disableCloseOnSelect
@@ -123,9 +133,9 @@ export default function DeaprtmentAddForm() {
                 {option.title}
               </li>
             )}
-            style={{ width: '100%' }}
+            style={{ width: "100%" }}
             value={formData.departmentAdmin}
-            onChange={handleAutocompleteChange('departmentAdmin')}
+            onChange={handleAutocompleteChange("departmentAdmin")}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -139,7 +149,7 @@ export default function DeaprtmentAddForm() {
         </Grid>
         <Grid item xs={12} md={6}>
           <Autocomplete
-          size="small"
+            size="small"
             multiple
             options={dropdownOptions}
             disableCloseOnSelect
@@ -155,9 +165,9 @@ export default function DeaprtmentAddForm() {
                 {option.title}
               </li>
             )}
-            style={{ width: '100%' }}
+            style={{ width: "100%" }}
             value={formData.sites}
-            onChange={handleAutocompleteChange('sites')}
+            onChange={handleAutocompleteChange("sites")}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -172,7 +182,11 @@ export default function DeaprtmentAddForm() {
       </Grid>
       <Button
         variant="contained"
-        style={{ width: 'fit-content', alignSelf: 'flex-start', marginTop: '16px' }}
+        style={{
+          width: "fit-content",
+          alignSelf: "flex-start",
+          marginTop: "16px",
+        }}
         disabled={isSubmitDisabled}
         onClick={handleSubmit}
       >
@@ -181,4 +195,3 @@ export default function DeaprtmentAddForm() {
     </Box>
   );
 }
-

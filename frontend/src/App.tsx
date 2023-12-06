@@ -1,13 +1,12 @@
-import './App.css'
-import ComapnyAdminAddForm from './components/Company-admin-add-from'
-
+import "./App.css";
+import ComapnyAdminAddForm from "./components/Company-admin-add-from";
 
 function App() {
   return (
-   <>
-   <ComapnyAdminAddForm />
-   </>
-  )
+    <>
+      <ComapnyAdminAddForm />
+    </>
+  );
 }
 
-export default App
+export default App;

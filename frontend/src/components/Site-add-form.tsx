@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
-import { TextField, Typography, Grid, Container, Autocomplete, Checkbox, Button } from '@mui/material';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import React, { useState } from "react";
+import {
+  TextField,
+  Typography,
+  Grid,
+  Container,
+  Autocomplete,
+  Checkbox,
+  Button,
+} from "@mui/material";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -11,18 +19,32 @@ interface FormData {
   location: string;
   selectedSimulators: string[];
   selectedSiteAdmins: string[];
-  [key: string]: string | string[]; 
+  [key: string]: string | string[];
 }
 
 interface SiteAddFormProps {}
 
 const SiteAddForm: React.FC<SiteAddFormProps> = () => {
-  const simulatorOptions = ['Auto', 'Manual', 'Semi-Auto', 'Semi-Manual', 'Optional', 'Customise'];
-  const siteAdminOptions = ['shiva', 'tejesh', 'priya', 'naresh', 'gyandeep', 'rukesh'];
+  const simulatorOptions = [
+    "Auto",
+    "Manual",
+    "Semi-Auto",
+    "Semi-Manual",
+    "Optional",
+    "Customise",
+  ];
+  const siteAdminOptions = [
+    "shiva",
+    "tejesh",
+    "priya",
+    "naresh",
+    "gyandeep",
+    "rukesh",
+  ];
 
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    location: '',
+    name: "",
+    location: "",
     selectedSimulators: [],
     selectedSiteAdmins: [],
   });
@@ -36,8 +58,8 @@ const SiteAddForm: React.FC<SiteAddFormProps> = () => {
 
   const validateForm = (): boolean => {
     const newFormErrors = {
-      name: formData.name.trim() === '',
-      location: formData.location.trim() === '',
+      name: formData.name.trim() === "",
+      location: formData.location.trim() === "",
       simulators: formData.selectedSimulators.length === 0,
       siteAdmins: formData.selectedSiteAdmins.length === 0,
     };
@@ -62,7 +84,7 @@ const SiteAddForm: React.FC<SiteAddFormProps> = () => {
     }));
     setFormErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: trimmedValue === '',
+      [name]: trimmedValue === "",
     }));
   };
 
@@ -84,23 +106,36 @@ const SiteAddForm: React.FC<SiteAddFormProps> = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      console.log('Form Data Submitted:', formData);
+      console.log("Form Data Submitted:", formData);
       setFormData({
-        name: '',
-        location: '',
+        name: "",
+        location: "",
         selectedSimulators: [],
         selectedSiteAdmins: [],
       });
     } else {
-      console.log('Form has errors. Please correct them.');
+      console.log("Form has errors. Please correct them.");
     }
   };
 
   return (
     <div>
       <Container>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-          <div style={{ boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', width: '80%', padding: '20px' }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+          }}
+        >
+          <div
+            style={{
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+              width: "80%",
+              padding: "20px",
+            }}
+          >
             <Typography component="h1" variant="h5">
               Site Add Form
             </Typography>
@@ -116,10 +151,10 @@ const SiteAddForm: React.FC<SiteAddFormProps> = () => {
                     variant="outlined"
                     name="name"
                     value={formData.name}
-                    onChange={(e) => handleInputChange('name', e.target.value)}
-                    onBlur={() => handleBlur('name')}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    onBlur={() => handleBlur("name")}
                     error={formErrors.name}
-                    helperText={formErrors.name && '* Required'}
+                    helperText={formErrors.name && "* Required"}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -132,10 +167,12 @@ const SiteAddForm: React.FC<SiteAddFormProps> = () => {
                     variant="outlined"
                     name="location"
                     value={formData.location}
-                    onChange={(e) => handleInputChange('location', e.target.value)}
-                    onBlur={() => handleBlur('location')}
+                    onChange={(e) =>
+                      handleInputChange("location", e.target.value)
+                    }
+                    onBlur={() => handleBlur("location")}
                     error={formErrors.location}
-                    helperText={formErrors.location && '* Required'}
+                    helperText={formErrors.location && "* Required"}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -165,7 +202,7 @@ const SiteAddForm: React.FC<SiteAddFormProps> = () => {
                         label="Simulator"
                         placeholder="Simulators"
                         error={formErrors.simulators}
-                        helperText={formErrors.simulators && '* Required'}
+                        helperText={formErrors.simulators && "* Required"}
                       />
                     )}
                   />
@@ -197,7 +234,7 @@ const SiteAddForm: React.FC<SiteAddFormProps> = () => {
                         label="Site-Admin"
                         placeholder="Site-Admins"
                         error={formErrors.siteAdmins}
-                        helperText={formErrors.siteAdmins && '* Required'}
+                        helperText={formErrors.siteAdmins && "* Required"}
                       />
                     )}
                   />
@@ -206,7 +243,11 @@ const SiteAddForm: React.FC<SiteAddFormProps> = () => {
               <Button type="submit" variant="contained" color="primary">
                 Submit
               </Button>
-              <Typography variant="caption" color="error" style={{ marginTop: '10px' }}>
+              <Typography
+                variant="caption"
+                color="error"
+                style={{ marginTop: "10px" }}
+              >
                 * Required fields
               </Typography>
             </form>
