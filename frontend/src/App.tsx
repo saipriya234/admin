@@ -1,12 +1,31 @@
-import "./App.css";
-import ComapnyAdminAddForm from "./components/Company-admin-add-from";
+import { Button } from "@mui/material";
+import { useState } from "react";
+import AddComponent from "./components/AddComponent";
+import EditComponent from "./components/EditComponent";
+const App = () => {
+  const [addSelect, setAddSelect] = useState<boolean>(true);
+  const [editSelect, setEditSelect] = useState<boolean>(false);
 
-function App() {
   return (
     <>
-      <ComapnyAdminAddForm />
+      <Button
+        onClick={() => {
+          setAddSelect(true), setEditSelect(false);
+        }}
+      >
+        Add
+      </Button>
+      <Button
+        onClick={() => {
+          setAddSelect(false), setEditSelect(true);
+        }}
+      >
+        Edit
+      </Button>
+      {addSelect && <AddComponent />}
+      {editSelect && <EditComponent />}
     </>
   );
-}
+};
 
 export default App;
